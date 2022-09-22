@@ -1,0 +1,41 @@
+body 
+{
+	background-color: black;
+	color: white;
+	font-family: "Lucida Console", "Courier New", monospace;
+	font-size: 8px;
+	font-size: 2vw;
+	text-align: center;
+}
+
+ul
+{
+	text-align: left;
+	font-size: 8px;
+	font-size: 2.33vw;
+}
+
+p
+{
+	text-align: left;
+	font-size: 10px;
+	font-size: 3vw;
+}
+
+h1
+{
+	font-size: 32px;
+	font-size: 8vw;
+}
+
+h2
+{
+	font-size: 20px;
+	font-size: 5vw;
+}
+
+h3
+{
+	font-size: 16px;
+	font-size: 4vw;
+}
