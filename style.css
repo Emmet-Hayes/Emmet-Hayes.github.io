@@ -37,3 +37,46 @@ h3
 	font-size: 16px;
 	font-size: 4vw;
 }
+
+.swiper-arrow {
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    cursor: pointer;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+}
+
+.left-arrow::after, .right-arrow::after {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-right: 2px solid white;
+    border-top: 2px solid white;
+}
+
+.left-arrow::after {
+    transform: rotate(-135deg);
+}
+
+.right-arrow::after {
+    transform: rotate(45deg);
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.swiper-arrow.active {
+    opacity: 1;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Emmet Hayes Projects Page</title>
+    <link rel="stylesheet" href="style.css">
+	<link
+		rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+	/>
+    <meta charset="UTF-8">
+</head>
+<body>
+	<h2>Projects</h2>
+	<p>Swipe Left and Right to peruse my projects!</p>
+	<div id="projectsCarousel" class="swiper">
+		<div class="swiper-arrow left-arrow"></div>
+		<div class="swiper-arrow right-arrow"></div>
+		<div class="swiper-wrapper">
+    		<!-- slides added here dynamically -->
+    	</div>
+    </div>
+	<p><a href="index.html">Home</a></p>
+    <script>
+	document.addEventListener('DOMContentLoaded', function () {
+	    fetch('https://api.github.com/users/Emmet-Hayes/repos')
+	    .then(response => response.json())
+	    .then(data => {
+		    const swiperWrapper = document.querySelector('.swiper-wrapper');
+		    data.forEach(repo => {
+		        const slideDiv = document.createElement('div');
+		        slideDiv.className = 'swiper-slide';
+
+		        const projectName = document.createElement('h3');
+		        projectName.textContent = repo.name;
+
+		        const projectDesc = document.createElement('p');
+		        projectDesc.textContent = repo.description;
+
+		        const projectLink = document.createElement('a');
+		        projectLink.href = repo.html_url;
+		        projectLink.textContent = 'View on GitHub';
+		        projectLink.target = '_blank';
+
+		        slideDiv.appendChild(projectName);
+		        slideDiv.appendChild(projectDesc);
+		        slideDiv.appendChild(projectLink);
+
+		        swiperWrapper.appendChild(slideDiv);
+	        });
+	    })
+	    .then(() => {
+		    let previousIndex = 0;
+		    const swiper = new Swiper('.swiper', {
+		        on: {
+		            init: function () {
+		                previousIndex = this.activeIndex;
+		            },
+		            slideChange: function () {
+		                let currentIndex = this.activeIndex;
+		                if (currentIndex > previousIndex) {
+		                    // Swiping to the right
+		                    document.querySelector('.right-arrow').classList.add('active');
+		                    document.querySelector('.left-arrow').classList.remove('active');
+		                } else {
+		                    // Swiping to the left
+		                    document.querySelector('.left-arrow').classList.add('active');
+		                    document.querySelector('.right-arrow').classList.remove('active');
+		                }
+		                previousIndex = currentIndex;
+		            },
+		            transitionEnd: function () {
+		                document.querySelector('.left-arrow').classList.remove('active');
+		                document.querySelector('.right-arrow').classList.remove('active');
+		            }
+		        }
+		    });
+
+	        document.querySelector('.left-arrow').addEventListener('click', function () {
+	            swiper.slidePrev();
+	        });
+
+	        document.querySelector('.right-arrow').addEventListener('click', function () {
+	            swiper.slideNext();
+	        });
+	    });
+	});
+    </script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</body>
+</html>
